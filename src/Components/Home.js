@@ -10,12 +10,12 @@ const Home = () => {
             Home Dashboard
           </h2>
           <h1 className="sm:text-3xl text-2xl font-medium title-font text-gray-900">
-            Welcome To Government College Of Engineering
+            Welcome To Corporate Voting System
           </h1>
         </div>
         <div className="flex w-3/5 space-x-2">
           <Link
-            to="/student-login"
+            to="/login/employee"
             className="flex rounded-lg items-center bg-gray-100 p-8 space-x-4 w-1/2 hover:shadow-lg"
           >
             <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
@@ -32,7 +32,7 @@ const Home = () => {
               </svg>
             </div>
             <h2 className="text-gray-900 text-lg title-font font-medium">
-               Student Login
+               Employee Login
             </h2>
             <div className=" text-indigo-500 inline-flex items-center">
               <svg
@@ -49,7 +49,7 @@ const Home = () => {
             </div>
           </Link>
           <Link
-            to="/faculty-login"
+            to="/login/admin"
             className="flex rounded-lg items-center bg-gray-100 p-8 space-x-4 w-1/2 hover:shadow-lg"
           >
             <div className="w-8 h-8 mr-3 inline-flex items-center justify-center rounded-full bg-indigo-500 text-white flex-shrink-0">
@@ -66,7 +66,7 @@ const Home = () => {
               </svg>
             </div>
             <h2 className="text-gray-900 text-lg title-font font-medium">
-            Faculty Login
+            Admin Login
             </h2>
             <div className=" text-indigo-500 inline-flex items-center">
               <svg

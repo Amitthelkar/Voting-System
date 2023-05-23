@@ -1,10 +1,10 @@
 
 import axios from "axios";
-import { toast } from "react-toastify";
+
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const StudentLogin = () => {
+const NewPassword = () => {
     const [userData, setUserData] = useState({ user_id: "", password: "" });
  
    
@@ -13,19 +13,19 @@ const StudentLogin = () => {
     //     navigate("/studentdashborad");
     // }
 
-    useEffect(() => {
-        //no need to come here if already logged in
-        if (localStorage.getItem("token")) {
-            navigate("studentdashborad");
-        }
-    }, [navigate]);
+    // useEffect(() => {
+    //     //no need to come here if already logged in
+    //     if (localStorage.getItem("token")) {
+    //         navigate("studentdashboard");
+    //     }
+    // }, [navigate]);
 
     const submit = async () => {
 
         var jsonData = JSON.stringify(userData);
         console.log(jsonData);
         await axios
-            .post("http://192.168.43.202:8000/api/login/", jsonData, {
+            .post("http://127.0.0.1:8000/api/login/", jsonData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -34,21 +34,9 @@ const StudentLogin = () => {
 
                 console.log(response.data);
                 if (response.data.token) {
-                    localStorage.setItem("token", response.data.token);
-                    console.log(response.data);
-                    console.log(localStorage.getItem("token"));
-                    toast.success("Welcome back!", {
-                        position: "top-center",
-                        autoClose: 2000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                    });
-                  
-                    navigate("/studentdashborad");
+                   console.log(response.data);
+                   
+                    navigate("/studentdashboard");
                 }
 
             });
@@ -130,4 +118,4 @@ const StudentLogin = () => {
     );
 };
 
-export default StudentLogin;
+export default NewPassword;

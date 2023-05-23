@@ -8,13 +8,13 @@ import { Fragment } from "react";
 import Home from "./Components/Home";
 import AdminLogin from "./Components/AdminLogin";
 import Navbar from "./Components/Navbar";
-import StudentLogin from "./Components/StudentLogin";
 import Login from "./Components/Login";
-import FacultyLogin from "./Components/FacultyLogin";
-import AddProject from "./Components/AddProject";
-import StudentDashborad from "./Components/StudentDashboard";
-import FacultyDashborad from "./Components/FacultyDashboard";
-import NewIdea from "./Components/NewIdea";
+import Registration from "./Components/Registration";
+import EmployeeLogin from "./Components/EmployeeLogin";
+import AdminDashboard from "./Components/AdminDashboard";
+import CreateQuery from "./Components/CreateQuery";
+import SetSolution from "./Components/SetSolution";
+
 
 function App() {
   return (
@@ -25,12 +25,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/login/admin" element={<AdminLogin />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/login/student" element={<StudentLogin />} />
-          <Route path="/login/faculty" element={<FacultyLogin />} />
-          <Route path="/studentdashborad" element={<StudentDashborad />} />
-          <Route path="/addproject" element={<AddProject />} />
-          <Route path="/facultydashboard" element={<FacultyDashborad />} />
-          <Route path="/newidea" element={<NewIdea />} />
+          <Route path="/login/employee" element={< EmployeeLogin/>} />
+          <Route path="/register/employee" element={<Registration />} />
+          <Route path="/dashboard/admin" element={<AdminDashboard />} />
+          <Route path="/createquery" element={<CreateQuery />} />
+          <Route path="/setsolution" element={<SetSolution />} />
+        
           
         </Routes>
       </Router>
