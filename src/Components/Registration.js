@@ -12,7 +12,7 @@ export default function Registration() {
         var jsonData = JSON.stringify(userData);
         console.log(jsonData);
         await axios
-            .post("http://127.0.0.1:8000/api/addUser/", jsonData, {
+            .post("https://localhost:7297/api/User/CreateUser", jsonData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -54,8 +54,10 @@ export default function Registration() {
                                 <input
                                     id="username"
                                     name="username"
+                                    autoComplete=""
+                                    placeholder="Amit"
                                     required
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block w-full rounded-md border-0 py-2 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     value={userData.username}
                                     onChange={(e) => {
                                         setUserData((prevData) => {
@@ -67,34 +69,12 @@ export default function Registration() {
                         </div>
 
                         <div>
-                            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
-                                Email address
-                            </label>
-                            <div className="mt-2">
-                                <input
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    autoComplete="email"
-                                    required
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                                    value={userData.email}
-                                    onChange={(e) => {
-                                        setUserData((prevData) => {
-                                            return { ...prevData, email: e.target.value };
-                                        });
-                                    }}
-
-                                />
-                            </div>
-                        </div>
-                        <div>
                             <div className="flex items-center justify-between">
                                 <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">
                                     Password
                                 </label>
                                 <div className="text-sm">
-                                    <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+                                    <a href="/" className="font-semibold text-indigo-600 hover:text-indigo-500">
                                         Forgot password?
                                     </a>
                                 </div>
@@ -106,7 +86,7 @@ export default function Registration() {
                                     type="password"
                                     autoComplete="current-password"
                                     required
-                                    className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                    className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     value={userData.password}
                                     onChange={(e) => {
                                         setUserData((prevData) => {
@@ -122,9 +102,9 @@ export default function Registration() {
                             <button
                                 type="submit"
                                 onClick={() => submit()}
-                                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                                className="w-full text-white bg-slate-800 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
                             >
-                                Register
+                                Register 
                             </button>
                         </div>
                     </form>

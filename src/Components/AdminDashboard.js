@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 function AdminDashboard() {
   return (
-    <div class="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-5">
+    <div className="p-10 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-4 gap-5">
 
-      <div class="rounded overflow-hidden shadow-lg">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">Create Query</div>
+      <div className="rounded overflow-hidden shadow-lg">
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2">Create Query</div>
           <Link
             to="/createquery"
             style={{ display: "flex", justifyContent: "center" }}
@@ -46,9 +46,9 @@ function AdminDashboard() {
         </div>
       </div>
 
-      <div class="rounded overflow-hidden shadow-lg">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">Set Solution</div>
+      <div className="rounded overflow-hidden shadow-lg">
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2">Set Solution</div>
 
           <Link
             to="/setsolution"
@@ -88,12 +88,12 @@ function AdminDashboard() {
         </div>
       </div>
 
-      <div class="rounded overflow-hidden shadow-lg">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2">Create Section Poll</div>
+      <div className="rounded overflow-hidden shadow-lg">
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2">Create Section Poll</div>
 
           <Link
-            to="/approverdashboard"
+            to="/setpollname"
             style={{ display: "flex", justifyContent: "center" }}
             className="flex rounded-lg items-center bg-gray-100 p-8 space-x-3 w-1/1 hover:shadow-lg "
           >
@@ -131,11 +131,11 @@ function AdminDashboard() {
       </div>
 
 
-      <div class="rounded overflow-hidden shadow-lg">
-        <div class="px-6 py-4">
-          <div class="font-bold text-xl mb-2"> Create Poll</div>
+      <div className="rounded overflow-hidden shadow-lg">
+        <div className="px-6 py-4">
+          <div className="font-bold text-xl mb-2"> Create Poll</div>
           <Link
-            to="/approverdashboard"
+            to="/createpolls"
             style={{ display: "flex", justifyContent: "center" }}
             className="flex rounded-lg items-center bg-gray-100 p-8 space-x-3 w-1/1 hover:shadow-lg "
           >

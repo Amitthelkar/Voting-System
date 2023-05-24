@@ -3,41 +3,36 @@ import React from 'react';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function CreateQuery() {
 
-    const [query, setQuery] = useState({query:""});
+function SetPollName() {
 
-    const navigate = useNavigate();
+    const [poll, setPoll] = useState({ pollName: "" });
+    const navigate= useNavigate();
 
     const onChangeText = e => {
         e.preventDefault();
-        setQuery((prevData) => {
-            return { ...prevData, query: e.target.value };
+        setPoll((prevData) => {
+            return { ...prevData, pollName: e.target.value };
         });
     };
     const create = async () => {
-       const jsonData=JSON.stringify(query);
-       console.log(jsonData)
+        const jsonData = JSON.stringify(poll);
+        console.log(jsonData)
         await axios
-        .post("https://localhost:7297/api/Query/CreateQuery", jsonData, {
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .then(async (response) => {
-            console.log(response.data)
-            navigate("/setsolution")
-        });
+            .post("https://localhost:7297/api/Poll/CreatePoll", jsonData, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then(async (response) => {
+                console.log(response.data);
+                navigate("/createpolls")
+            });
 
 
 
     }
-    
-    // function create(e) {
-    //     e.preventDefault();
-    //     console.log("from send approver")
-    //     navigate("/approverdashboard")
-    // }
+
 
     return (
         <div className='flex flex-col items-center px-6 mx-auto py-12 lg:py-24'>
@@ -57,10 +52,10 @@ function CreateQuery() {
                 >
                     Create
                 </button>
-                
+
             </div>
         </div>
     );
 }
 
-export default CreateQuery;
+export default SetPollName;

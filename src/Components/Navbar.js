@@ -13,7 +13,7 @@ const Navbar = () => {
                             <span className="ml-3 text-xl">Home</span>
                         </Link>
                         <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-                            <Link to="/register/student" className="mr-5 hover:text-gray-900">Register</Link>
+                            <Link to="/register" className="mr-5 hover:text-gray-900">Register</Link>
 
                         </nav>
                         

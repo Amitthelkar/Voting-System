@@ -14,6 +14,8 @@ import EmployeeLogin from "./Components/EmployeeLogin";
 import AdminDashboard from "./Components/AdminDashboard";
 import CreateQuery from "./Components/CreateQuery";
 import SetSolution from "./Components/SetSolution";
+import SetPollName from "./Components/SetPollName";
+import CreatePolls from "./Components/CreatePolls";
 
 
 function App() {
@@ -26,10 +28,12 @@ function App() {
           <Route path="/login/admin" element={<AdminLogin />} />
           <Route path="/login" element={<Login />} />
           <Route path="/login/employee" element={< EmployeeLogin/>} />
-          <Route path="/register/employee" element={<Registration />} />
+          <Route path="/register" element={<Registration />} />
           <Route path="/dashboard/admin" element={<AdminDashboard />} />
           <Route path="/createquery" element={<CreateQuery />} />
           <Route path="/setsolution" element={<SetSolution />} />
+          <Route path="/setpollname" element={<SetPollName />} />
+          <Route path="/createpolls" element={<CreatePolls />} />
         
           
         </Routes>
