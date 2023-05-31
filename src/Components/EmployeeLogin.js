@@ -16,9 +16,12 @@ const EmployeeLogin = () => {
                 },
             })
             .then((response) => {
+
                 localStorage.setItem("token", response.data.token)
-                console.log(response.data.user.role);
+                console.log(response.data.user.userId);
+                localStorage.setItem("userid",response.data.user.userId)
                 if (response.data.user.role === "employee") {
+
                     navigate("/dashboard/employee");
                 }
                 else{

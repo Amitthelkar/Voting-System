@@ -29,7 +29,10 @@ function CreateQuery() {
         .then(async (response) => {
             console.log(response.data)
             navigate("/setsolution")
-        });
+        }).catch((res)=>{
+            alert('Already Created')
+
+        })
 
 
 

@@ -13,38 +13,17 @@ function Queryjs({ query }) {
         pollId: localStorage.getItem("pollid"),
         queryId: query.queryId,
         solutionId: "",
-        userId: localStorage.getItem("userId"),
+        userId: localStorage.getItem("userid"),
     });
     const navigate = useNavigate();
     useEffect(() => {
-
-        // const getsolution = async () => {
-        //     const res = await fetch(
-        //         `https://localhost:7014/api/Solution/GetSolutionsByQueryId?queryId=${query.queryId}`
-        //     );
-        //     const getsol = await res.json();
-        //     setSolution(await getsol);
-        //     // console.log(getsol)
-        // };
-        // getsolution();
 
         axios
         .get( `https://localhost:7014/api/Solution/GetSolutionsByQueryId?queryId=${query.queryId}`, { headers: { Authorization: 'Bearer '.concat(localStorage.getItem('token')) } })
         .then((res) => {
             console.log(res.data)
             setSolution(res.data)
-            
         });
-
-        // const getqueryname = async () => {
-        //     const res = await fetch(
-        //         `https://localhost:7014/api/Query/GetQueryById?queryid=${query.queryId}`
-        //     );
-        //     const getname = await res.json();
-        //     setName(await getname.query);
-        //     // console.log(getname.query)
-        // };
-        // getqueryname();
 
         axios
         .get( `https://localhost:7014/api/Query/GetQueryById?queryid=${query.queryId}`, { headers: { Authorization: 'Bearer '.concat(localStorage.getItem('token')) } })
@@ -53,8 +32,6 @@ function Queryjs({ query }) {
             setName(res.data.query)
         });
         
-        
-
     }, []);
 
     const handlesolution = async (e) => {
@@ -65,32 +42,7 @@ function Queryjs({ query }) {
                 solutionId: solutionid,
             };
         });
-   
     };
-
-
-
-    // const handleRadioChange = async (e) => {
-    //     const solutionid = e.target.value;
-    //     setSolutionidd(await solutionid)
-    //     console.log(solutionid)
-    //     console.log(solutionidd)
-   
-       
-    //     const jsonData = JSON.stringify(pollData);
-    //     console.log(jsonData);
-
-    //     await axios
-    //         .post("https://localhost:7014/api/Response/CreateResponse", jsonData, {
-    //             headers: {
-    //                 "Content-Type": "application/json",
-    //                 "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
-    //             },
-    //         })
-    //         .then(async (response) => {
-    //             console.log(response.data);
-    //         });
-    // };
 
     function handleCheck(solutionIdParam){
         console.log(solutionIdParam)
@@ -113,6 +65,9 @@ function Queryjs({ query }) {
             })
             .then((response) => {
                 console.log(response.status)
+                if(response.status == 200){
+                    alert(" Your Vote Added Succesesfully ")
+                }
             }).catch((res)=>{
                 alert('Already responded')
 

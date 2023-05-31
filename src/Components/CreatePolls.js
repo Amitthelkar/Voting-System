@@ -89,9 +89,9 @@ function CreatePolls() {
                 console.log(response.data)
                     setRes(response.data)
                     navigate("/dashboard/admin")
-               
-              
-            });
+            }).catch((res)=>{
+                alert('Already Created')
+            })
     }
 
 

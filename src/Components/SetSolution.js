@@ -16,14 +16,6 @@ export default function SetSolution() {
 
     useEffect(() => {
 
-
-        // const getquery = async () => {
-        //     const res = await fetch("https://localhost:7297/api/Query/GetQueries");
-        //     const getque = await res.json();
-        //     setQuery(await getque)
-        // }
-        // getquery();
-
         axios
         .get( `https://localhost:7014/api/Query/GetQueries`, { headers: { Authorization: 'Bearer '.concat(localStorage.getItem('token')) } })
         .then((res) => {
@@ -33,14 +25,12 @@ export default function SetSolution() {
         });
     }, [])
 
-    const handlequery = (e) => {
+    const handlequery =async (e) => {
         const queryid = e.target.value;
-        setQueryId(queryid);
-        console.log(queryid)
-        console.log(queryId)
+        setQueryId(await queryid)
     }
 
-    const onChangeText = e => {
+    const onChangeText = (e) => {
         e.preventDefault();
         setSolution((prevData) => {
             return { ...prevData, solutionName: e.target.value };
@@ -52,25 +42,30 @@ export default function SetSolution() {
         setSolution((prevData) => {
             return { ...prevData, queryId: queryId };
         });
+        console.log(queryId)
         const temp = {
             solutionName: solution.solutionName,
-             queryId: solution.queryId
+             queryId: queryId
         }
         const jsonData = JSON.stringify(temp);
         console.log(jsonData)
         await axios
-            .post("https://localhost:7014/api/Solution/CreateSolution", {
+            .post(`https://localhost:7014/api/Solution/CreateSolution`, temp,{
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
                 },
-                data: temp,
+             
 
             })
             .then(async (response) => {
                  console.log( await response.data)
+                 console.log(response.status)
                 navigate("/dashboard/admin")
-            });
+               
+            }).catch((res)=>{
+                alert('Already Created')
+            })
     }
 
     return (

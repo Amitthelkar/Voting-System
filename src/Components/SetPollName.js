@@ -28,7 +28,10 @@ function SetPollName() {
             .then(async (response) => {
                 console.log(response.data);
                 navigate("/createpolls")
-            });
+            }).catch((res)=>{
+                console.log(res.status)
+                alert('Already Created')
+            })
 
 
 

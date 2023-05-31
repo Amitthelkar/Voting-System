@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function Registration() {
 
-    const [userData, setUserData] = useState({ username: "", email: "", password: "" });
+    const [userData, setUserData] = useState({ username: "", password: "" });
     const navigate = useNavigate();
 
     const submit = async () => {
@@ -12,7 +12,7 @@ export default function Registration() {
         var jsonData = JSON.stringify(userData);
         console.log(jsonData);
         await axios
-            .post("https://localhost:7297/api/User/CreateUser", jsonData, {
+            .post("https://localhost:7014/api/User/CreateUser", jsonData, {
                 headers: {
                     "Content-Type": "application/json",
                     "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
@@ -22,7 +22,9 @@ export default function Registration() {
 
                 console.log(response.data);
                 if (response.data) {
-                    navigate("/login/student");
+                    navigate("/");
+                }else{
+                    alert("Please Enter Valid Data")
                 }
               
 
@@ -55,7 +57,6 @@ export default function Registration() {
                                 <input
                                     id="username"
                                     name="username"
-                                    autoComplete=""
                                     placeholder="Amit"
                                     required
                                     className="block w-full rounded-md border-0 py-2 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
@@ -85,7 +86,6 @@ export default function Registration() {
                                     id="password"
                                     name="password"
                                     type="password"
-                                    autoComplete="current-password"
                                     required
                                     className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                     value={userData.password}
