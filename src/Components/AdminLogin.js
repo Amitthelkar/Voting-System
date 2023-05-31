@@ -1,35 +1,36 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
     const [userData, setUserData] = useState({ username: "", password: "" });
-const [user, setUser] = useState([])
-const navigate= useNavigate();
+    const [user, setUser] = useState([])
+    const navigate = useNavigate();
+    const submit = async () => {
+        const jsonData = JSON.stringify(userData);
+        await axios
+            .post("https://localhost:7014/api/Authentication", jsonData, {
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => {
+                localStorage.setItem("token", response.data.token)
+                console.log(response.data);
+                if (response.data.user.role === "admin") {
+                    navigate("/dashboard/employee");
+                }
+                else{
+                    alert("You Are Not Allowes To Login In Admin Dashboard")
+                }
 
-    useEffect(() => {
-      
-        const getuser= async()=>{
-                    const res= await fetch("https://localhost:7297/api/User");
-                    const getuser=await res.json();
-                    setUser( await getuser);
-                    console.log(getuser)
-        }
-    getuser();
-     
-    }, [])
 
-    const check=()=>{
-        user.forEach(element => {
-            if(element.username === userData.username && element.password === userData.password){
-                console.log("login")
-                navigate("/dashboard/admin")
-            }
-        });
+            });
 
     }
 
 
-    
+
     return (
         <section className="bg-gray-50">
             <div className="flex flex-col items-center px-6 mx-auto py-12 lg:py-24">
@@ -94,7 +95,7 @@ const navigate= useNavigate();
 
                             <button
                                 type="submit"
-                                onClick={check}
+                                onClick={submit}
                                 className="w-full text-white bg-slate-800 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
                             >
                                 Sign in

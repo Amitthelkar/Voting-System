@@ -7,18 +7,6 @@ const EmployeeLogin = () => {
     const [user, setUser] = useState([])
     const navigate = useNavigate();
 
-    useEffect(() => {
-
-        const getuser = async () => {
-            const res = await fetch("https://localhost:7297/api/User");
-            const getuser = await res.json();
-            setUser(await getuser);
-            console.log(getuser)
-        }
-        getuser();
-
-    }, [])
-
     const submit = async () => {
         const jsonData = JSON.stringify(userData);
         await axios
@@ -28,22 +16,17 @@ const EmployeeLogin = () => {
                 },
             })
             .then((response) => {
-localStorage.setItem("token",response.data.token)
-                console.log(response.data.token);
-                if (response.data.token) {
+                localStorage.setItem("token", response.data.token)
+                console.log(response.data.user.role);
+                if (response.data.user.role === "employee") {
                     navigate("/dashboard/employee");
+                }
+                else{
+                    alert("You Are Not Allowes To Login In Employee Dashboard")
                 }
 
 
             });
-        user.forEach(element => {
-            if (element.username === userData.username && element.password === userData.password) {
-                console.log("login")
-                // console.log(element)
-                localStorage.setItem("userId", element.userId);
-                navigate("/dashboard/admin")
-            }
-        });
 
     }
 
