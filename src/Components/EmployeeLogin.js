@@ -1,42 +1,54 @@
-
-import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 const EmployeeLogin = () => {
-    const [userData, setUserData] = useState({ email: "", password: "" });
-   
-   const navigate = useNavigate();
+    const [userData, setUserData] = useState({ username: "", password: "" });
+    const [user, setUser] = useState([])
+    const navigate = useNavigate();
+
+    useEffect(() => {
+
+        const getuser = async () => {
+            const res = await fetch("https://localhost:7297/api/User");
+            const getuser = await res.json();
+            setUser(await getuser);
+            console.log(getuser)
+        }
+        getuser();
+
+    }, [])
 
     const submit = async () => {
-
-        var jsonData = JSON.stringify(userData);
-        console.log(jsonData);
+        const jsonData = JSON.stringify(userData);
         await axios
-            .post("http://127.0.0.1:8000/api/auth/", jsonData, {
+            .post("https://localhost:7014/api/Authentication", jsonData, {
                 headers: {
                     "Content-Type": "application/json",
                 },
             })
-            .then(async (response) => {
-                localStorage.setItem('token',response.data.access);
-                await axios
-                    .get("http://127.0.0.1:8000/api/user/me/", { headers: { Authorization:  'Bearer '.concat(response.data.access) } })
-                    .then((res) => {  
-                        localStorage.setItem('userid',res.data.id);
-                      
-            
-                        if (res.data.role === "student") {
-                            navigate("/studentdashboard")
-                        }
-                        if (res.data.role === "faculty") {
-                            navigate("/facultydashboard")
-                        }
+            .then((response) => {
+localStorage.setItem("token",response.data.token)
+                console.log(response.data.token);
+                if (response.data.token) {
+                    navigate("/dashboard/employee");
+                }
 
-                    });
+
             });
+        user.forEach(element => {
+            if (element.username === userData.username && element.password === userData.password) {
+                console.log("login")
+                // console.log(element)
+                localStorage.setItem("userId", element.userId);
+                navigate("/dashboard/admin")
+            }
+        });
 
-    };
+    }
+
+
+
     return (
         <section className="bg-gray-50">
             <div className="flex flex-col items-center px-6 mx-auto py-12 lg:py-24">
@@ -55,22 +67,22 @@ const EmployeeLogin = () => {
                         >
                             <div>
                                 <label
-
+                                    htmlFor="email"
                                     className="block mb-2 text-sm font-medium text-gray-900 "
                                 >
                                     Username
                                 </label>
                                 <input
                                     type="text"
-                                    name="email"
-                                    id="email"
+                                    name="username"
+                                    id="username"
                                     className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 "
-                                    placeholder="JhonDoe"
+                                    placeholder="Amit"
                                     required
-                                    value={userData.email}
+                                    value={userData.username}
                                     onChange={(e) => {
                                         setUserData((prevData) => {
-                                            return { ...prevData, email: e.target.value };
+                                            return { ...prevData, username: e.target.value };
                                         });
                                     }}
                                 />
@@ -101,8 +113,8 @@ const EmployeeLogin = () => {
 
                             <button
                                 type="submit"
-                                onClick={() => submit()}
-                                className="w-full text-white bg-slate-800 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
+                                onClick={submit}
+                                className="w-full text-white bg-slate-800 hover:bg-slate-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-3 text-center"
                             >
                                 Sign in
                             </button>
@@ -115,3 +127,4 @@ const EmployeeLogin = () => {
 };
 
 export default EmployeeLogin;
+

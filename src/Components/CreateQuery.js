@@ -17,11 +17,13 @@ function CreateQuery() {
     };
     const create = async () => {
        const jsonData=JSON.stringify(query);
+       const token1 = localStorage.getItem("token")
        console.log(jsonData)
         await axios
-        .post("https://localhost:7297/api/Query/CreateQuery", jsonData, {
+        .post("https://localhost:7014/api/Query/CreateQuery", jsonData, {
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
             },
         })
         .then(async (response) => {

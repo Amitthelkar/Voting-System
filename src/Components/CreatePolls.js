@@ -14,23 +14,42 @@ function CreatePolls() {
     const [pollData, setPollData] = useState({ pollId: '', queryId: "" });
     const [res, setRes] = useState("")
     const navigate=useNavigate();
-
+   
     useEffect(() => {
-        const getpoll = async () => {
-            const res = await fetch("https://localhost:7297/api/Poll/GetPolls");
-            const getpoll = await res.json();
+        // const getpoll = async () => {
+        //     const res = await fetch("https://localhost:7297/api/Poll/GetPolls");
+        //     const getpoll = await res.json();
 
-            setPoll(await getpoll)
-        }
+        //     setPoll(await getpoll)
+        // }
 
-        getpoll();
+        // getpoll();
 
-        const getquery = async () => {
-            const res = await fetch("https://localhost:7297/api/Query/GetQueries");
-            const getque = await res.json();
-            setQuery(await getque)
-        }
-        getquery();
+        axios
+        .get( `https://localhost:7014/api/Poll/GetPolls`, { headers: { Authorization: 'Bearer '.concat(localStorage.getItem('token')) } })
+        .then((res) => {
+            
+                console.log(res.data)
+                setPoll(res.data)
+        
+            
+        });
+
+        // const getquery = async () => {
+        //     const res = await fetch("https://localhost:7297/api/Query/GetQueries");
+        //     const getque = await res.json();
+        //     setQuery(await getque)
+        // }
+        // getquery();
+
+        
+        axios
+        .get( `https://localhost:7014/api/Query/GetQueries`, { headers: { Authorization: 'Bearer '.concat(localStorage.getItem('token')) } })
+        .then((res) => {
+            console.log(res.data)
+            setQuery(res.data)
+            
+        });
     }, [])
 
     const handlepoll = (e) => {
@@ -60,21 +79,25 @@ function CreatePolls() {
         const jsonData = JSON.stringify(pollData);
         console.log(jsonData)
         await axios
-            .post("https://localhost:7297/api/PollQuery/CreatePollQuery", jsonData, {
+            .post("https://localhost:7014/api/PollQuery/CreatePollQuery", jsonData, {
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
                 },
             })
             .then(async (response) => {
                 console.log(response.data)
-                setRes(response.data)
-                navigate("/dashboard/admin")
+                    setRes(response.data)
+                    navigate("/dashboard/admin")
+               
+              
             });
     }
 
 
     return (
         <>
+
             <div className='flex flex-col items-center px-5 mx-50 '>
 
                 <label htmlFor="poll" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
@@ -113,6 +136,7 @@ function CreatePolls() {
                 </button>
 
             </div>
+         
         
         </>
     );

@@ -19,9 +19,10 @@ function SetPollName() {
         const jsonData = JSON.stringify(poll);
         console.log(jsonData)
         await axios
-            .post("https://localhost:7297/api/Poll/CreatePoll", jsonData, {
+            .post("https://localhost:7014/api/Poll/CreatePoll", jsonData, {
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
                 },
             })
             .then(async (response) => {

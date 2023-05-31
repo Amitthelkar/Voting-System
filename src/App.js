@@ -16,6 +16,9 @@ import CreateQuery from "./Components/CreateQuery";
 import SetSolution from "./Components/SetSolution";
 import SetPollName from "./Components/SetPollName";
 import CreatePolls from "./Components/CreatePolls";
+import EmployeeDashboard from "./Components/EmployeeDashboard";
+import Queryjs from "./Components/Queryjs";
+import Result from "./Components/Result";
 
 
 function App() {
@@ -34,6 +37,9 @@ function App() {
           <Route path="/setsolution" element={<SetSolution />} />
           <Route path="/setpollname" element={<SetPollName />} />
           <Route path="/createpolls" element={<CreatePolls />} />
+          <Route path="/dashboard/employee" element={<EmployeeDashboard />} />
+          <Route path="/queryjs" element={<Queryjs />} />
+          <Route path="/result" element={<Result />} />
         
           
         </Routes>

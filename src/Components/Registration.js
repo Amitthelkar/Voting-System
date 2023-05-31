@@ -15,6 +15,7 @@ export default function Registration() {
             .post("https://localhost:7297/api/User/CreateUser", jsonData, {
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
                 },
             })
             .then((response) => {

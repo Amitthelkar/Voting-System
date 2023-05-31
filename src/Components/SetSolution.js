@@ -17,18 +17,27 @@ export default function SetSolution() {
     useEffect(() => {
 
 
-        const getquery = async () => {
-            const res = await fetch("https://localhost:7297/api/Query/GetQueries");
-            const getque = await res.json();
-            setQuery(await getque)
-        }
-        getquery();
+        // const getquery = async () => {
+        //     const res = await fetch("https://localhost:7297/api/Query/GetQueries");
+        //     const getque = await res.json();
+        //     setQuery(await getque)
+        // }
+        // getquery();
+
+        axios
+        .get( `https://localhost:7014/api/Query/GetQueries`, { headers: { Authorization: 'Bearer '.concat(localStorage.getItem('token')) } })
+        .then((res) => {
+            console.log(res.data)
+            setQuery(res.data)
+            
+        });
     }, [])
 
     const handlequery = (e) => {
         const queryid = e.target.value;
         setQueryId(queryid);
         console.log(queryid)
+        console.log(queryId)
     }
 
     const onChangeText = e => {
@@ -43,13 +52,20 @@ export default function SetSolution() {
         setSolution((prevData) => {
             return { ...prevData, queryId: queryId };
         });
-        const jsonData = JSON.stringify(solution);
+        const temp = {
+            solutionName: solution.solutionName,
+             queryId: solution.queryId
+        }
+        const jsonData = JSON.stringify(temp);
         console.log(jsonData)
         await axios
-            .post("https://localhost:7297/api/Solution/CreateSolution", jsonData, {
+            .post("https://localhost:7014/api/Solution/CreateSolution", {
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": 'Bearer '.concat(localStorage.getItem('token'))
                 },
+                data: temp,
+
             })
             .then(async (response) => {
                  console.log( await response.data)
@@ -61,7 +77,7 @@ export default function SetSolution() {
         <>
             <div className='flex flex-col items-center px-5 mx-50 '>
 
-                <label for="queries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
+                <label htmlFor="queries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an option</label>
                 <select id="queries" onChange={(e) => handlequery(e)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option selected>Choose Query</option>
                     {
